@@ -156,7 +156,7 @@ export default function PeriodicTablePage() {
               </div>
             </div>
           ) : (
-            <div className="overflow-fixed">
+            <div className="overflow">
               <div className="flex flex-col gap-4">
                 {filteredElements.map((element) => (
                   <div
@@ -174,7 +174,7 @@ export default function PeriodicTablePage() {
           )}
         </div>
         {selectedElement && (
-          <div className="lg:w-1/3 right-0 absolute">
+          <div className="lg:w-1/3">
             <ElementDetail element={selectedElement} />
             <ElementModel element={selectedElement} />
           </div>
