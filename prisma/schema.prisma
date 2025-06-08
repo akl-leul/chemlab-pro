@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
   // For Vercel Postgres
   // directUrl = env("POSTGRES_URL_NON_POOLING")
@@ -38,12 +38,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?  
+  access_token      String?  
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?  
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -84,7 +84,7 @@ model Element {
   meltingPoint      Float?
   boilingPoint      Float?
   discoveredBy      String?
-  description       String   @db.Text
+  description       String    
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
@@ -96,8 +96,8 @@ model Reaction {
   reactants   String
   products    String
   balanced    String
-  safety      String[] @db.Text
-  description String?  @db.Text
+  safety      String
+  description String?   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -109,7 +109,7 @@ model BlogPost {
   id        String    @id @default(cuid())
   title     String
   slug      String    @unique
-  content   String    @db.Text
+  content   String     
   image     String?
   published Boolean   @default(false)
   authorId  String
@@ -122,7 +122,7 @@ model BlogPost {
 // Comment model
 model Comment {
   id         String   @id @default(cuid())
-  content    String   @db.Text
+  content    String    
   blogPostId String
   userId     String
   createdAt  DateTime @default(now())
