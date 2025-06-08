@@ -3,9 +3,11 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { elementData } from "@/lib/element-data"
-import ElementDetail from "@/components/element-detail"
-import ElementModel from "@/components/element-model"
+import { elementData } from "@/lib/element-data" 
+import dynamic from "next/dynamic"
+const ElementDetail = dynamic(() => import('@/components/element-detail'), { ssr: false })
+const ElementModel = dynamic(() => import('@/components/element-model'), { ssr: false })
+
 
 export default function PeriodicTablePage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -154,7 +156,7 @@ export default function PeriodicTablePage() {
               </div>
             </div>
           ) : (
-            <div className="overflow-auto">
+            <div className="overflow-fixed">
               <div className="flex flex-col gap-4">
                 {filteredElements.map((element) => (
                   <div
@@ -172,7 +174,7 @@ export default function PeriodicTablePage() {
           )}
         </div>
         {selectedElement && (
-          <div className="lg:w-1/3">
+          <div className="lg:w-1/3 right-0 absolute">
             <ElementDetail element={selectedElement} />
             <ElementModel element={selectedElement} />
           </div>
